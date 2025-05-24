@@ -94,10 +94,10 @@ asearch_button = RectButton(
     rectcolor=colors["gray"],
     screen=screen, font=RectButtonFont)
 
-qlearning_button = RectButton(
+dfs_button = RectButton(
     left=algo_button_x, top=PADDING + 3*(algo_button_height + PADDING),
     width=algo_button_width, height=algo_button_height,
-    text="Q-learning", textcolor=colors["white"],
+    text="DFS", textcolor=colors["white"],
     rectcolor=colors["gray"],
     screen=screen, font=RectButtonFont)
 
@@ -130,7 +130,7 @@ while True:
         dijkstra_button()
         bfs_button()
         asearch_button()
-        qlearning_button()
+        dfs_button()
         
         # if Reset button is pressed, change color back to white and set flag to False
         if RESET == True:
@@ -237,7 +237,7 @@ while True:
                 dijkstra_button.color_change(colors["yellow"])
                 bfs_button.color_change(colors["gray"])
                 asearch_button.color_change(colors["gray"])
-                qlearning_button.color_change(colors["gray"])
+                dfs_button.color_change(colors["gray"])
                 time.sleep(0.1)
 
             # button for BFS
@@ -246,7 +246,7 @@ while True:
                 bfs_button.color_change(colors["yellow"])
                 dijkstra_button.color_change(colors["gray"])
                 asearch_button.color_change(colors["gray"])
-                qlearning_button.color_change(colors["gray"])
+                dfs_button.color_change(colors["gray"])
                 time.sleep(0.1)
 
             # button for A_search
@@ -255,13 +255,13 @@ while True:
                 asearch_button.color_change(colors["yellow"])
                 dijkstra_button.color_change(colors["gray"])
                 bfs_button.color_change(colors["gray"])
-                qlearning_button.color_change(colors["gray"])
+                dfs_button.color_change(colors["gray"])
                 time.sleep(0.1)
 
-            # button for Q_learning
-            elif qlearning_button.rect.collidepoint(mouse):
-                ALGO = "Q_learning"
-                qlearning_button.color_change(colors["yellow"])
+            # button for DFS
+            elif dfs_button.rect.collidepoint(mouse):
+                ALGO = "DFS"
+                dfs_button.color_change(colors["yellow"])
                 dijkstra_button.color_change(colors["gray"])
                 bfs_button.color_change(colors["gray"])
                 asearch_button.color_change(colors["gray"])
@@ -337,9 +337,10 @@ while True:
             algorithm.initialize()
             algorithm.solver()
 
-        elif ALGO == "Q_learning":
-            algorithm = Q_Learning(board)
-            algorithm.solver(TRAIN)
+        elif ALGO == "DFS":
+            algorithm = DFS(board)
+            algorithm.initialize()
+            algorithm.solver()
 
         # if find shortest path, draw the path. if not, show "No Solution Found"
         if algorithm.find == True:
